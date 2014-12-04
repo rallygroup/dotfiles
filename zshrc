@@ -1,10 +1,6 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.dotfiles/zsh
 
-# Set name of the theme to load.
-# Look in ~/.dotfiles/zsh/themes/
-# ZSH_THEME="sxalexander"
-
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
@@ -19,16 +15,6 @@ ZSH=$HOME/.dotfiles/zsh
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
-
-# modify the prompt to contain git branch name if applicable
-git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    echo " %{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}"
-  fi
-}
-setopt promptsubst
-export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
 
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
@@ -66,8 +52,8 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
-# exports
-[[ -f ~/.exports ]] && source ~/.exports
+# prompt
+[[ -f ~/.prompt ]] && source ~/.prompt
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
