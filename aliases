@@ -1,0 +1,5 @@
+alias ls='ls -ahFG'
+alias ll='ls -l'
+
+# Include custom aliases
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local

@@ -3,7 +3,7 @@ ZSH=$HOME/.dotfiles/zsh
 
 # Set name of the theme to load.
 # Look in ~/.dotfiles/zsh/themes/
-ZSH_THEME="sxalexander"
+# ZSH_THEME="sxalexander"
 
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
@@ -20,13 +20,37 @@ ZSH_THEME="sxalexander"
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
 
+# modify the prompt to contain git branch name if applicable
+git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ -n $ref ]]; then
+    echo " %{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}"
+  fi
+}
+setopt promptsubst
+export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+
+# load our own completion functions
+fpath=(~/.zsh/completion $fpath)
+
+# makes color constants available
+autoload -U colors
+colors
+
+# enable colored output from ls, etc
+export CLICOLOR=1
+
+# history settings
+setopt hist_ignore_all_dups inc_append_history
+HISTFILE=~/.zhistory
+HISTSIZE=4096
+SAVEHIST=4096
+
+# awesome cd movements from zshkit
+setopt autocd autopushd pushdminus pushdsilent pushdtohome cdablevars
+DIRSTACKSIZE=5
+
 HIST_IGNORE_SPACE="true"
-
-export PYTHONPATH="${PYTHONPATH}:/usr/local/lib/python2.7/site-packages"
-
-# Customize to your needs...
-export PATH="/Applications/MAMP/bin/php/php5.5.10/bin:$PATH:/Applications/MAMP/Library/bin"
-export PATH="$PATH:/Users/sxalexander/bin"
 
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/zsh/plugins/*)
 # Custom plugins may be added to ~/.dotfiles/zsh/custom/plugins/
@@ -38,47 +62,12 @@ source $ZSH/oh-my-zsh.sh
 # brew installed zsh completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# Setting up Z (https://github.com/rupa/z)
-source $HOME/bin/z.sh
 
-alias ls='ls -ahFG'
-alias ll='ls -l'
+# aliases
+[[ -f ~/.aliases ]] && source ~/.aliases
 
-# Set architecture flags
-export ARCHFLAGS="-arch x86_64"
+# exports
+[[ -f ~/.exports ]] && source ~/.exports
 
-export EDITOR="vim"
-export PGDATA='/var/db/pgsql'
-
-alias mysql="/Applications/MAMP/Library/bin/mysql"
-
-# cache pip-installed packages to avoid re-downloading
-export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-# install into global python packages
-function pip-global()   PIP_REQUIRE_VIRTUALENV="" pip "$@"
-
-# virtualenvwrapper
-VIRTUALENVWRAPPER_LOG_DIR=/tmp
-export VIRTUALENVWRAPPER_LOG_DIR
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_HOOK_DIR=$WORKON_HOME
-export PROJECT_HOME=$HOME/projects
-export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
-
-
-source /usr/local/bin/virtualenvwrapper.sh
-export PIP_VIRTUALENV_BASE=$WORKON_HOME # Tell pip to create its virtualenvs in $WORKON_HOME.
-export PIP_RESPECT_VIRTUALENV=true # Tell pip to automatically use the currently active virtualenv.
-
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export PATH="$HOME/.bin:$PATH"
-
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
-
-export PATH="$PATH:/usr/local/lib/node_modules"
-source $(brew --prefix nvm)/nvm.sh
-
-export NVM_DIR=~/.nvm
+# Local config
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

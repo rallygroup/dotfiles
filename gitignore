@@ -1,0 +1,14 @@
+*.DS_Store
+
+.hg
+.svn
+
+*.db
+*.sqlite3
+
+*.pyc
+*.sw[nop]
+
+# fabric settings
+local_settings.py
+
