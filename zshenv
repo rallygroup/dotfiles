@@ -26,3 +26,12 @@ export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
+
+export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+export PATH="$PATH:/usr/local/lib/node_modules"
+
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+
+source $(brew --prefix)/etc/profile.d/z.sh
