@@ -41,13 +41,25 @@ HIST_IGNORE_SPACE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/zsh/plugins/*)
 # Custom plugins may be added to ~/.dotfiles/zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(fabric sublime python django osx battery heroku brew virtualenvwrapper jira)
+plugins=(docker fabric sublime python django osx battery heroku brew virtualenvwrapper jira)
 
 source $ZSH/oh-my-zsh.sh
 
 # brew installed zsh completions
 fpath=(/usr/local/share/zsh-completions $fpath)
 
+# When the current working directory changes, run a method that checks for a .env file, then sources it. Happy days.
+# https://github.com/johnhamelink/env-zsh
+autoload -U add-zsh-hook
+load-local-conf() {
+     # check file exists, is regular file and is readable:
+     if [[ -f .env && -r .env ]]; then
+       source .env
+     fi
+}
+add-zsh-hook chpwd load-local-conf
+
+which boot2docker 1> /dev/null && $(boot2docker shellinit)
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
