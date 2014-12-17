@@ -59,7 +59,7 @@ load-local-conf() {
 }
 add-zsh-hook chpwd load-local-conf
 
-which boot2docker 1> /dev/null && $(boot2docker shellinit)
+which boot2docker 1> /dev/null && $(boot2docker shellinit 2> /dev/null)
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
