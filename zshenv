@@ -15,15 +15,16 @@ export EDITOR="vim"
 export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
 
 # virtualenvwrapper
-export VIRTUALENVWRAPPER_LOG_DIR
+export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/projects
-source /usr/local/bin/virtualenvwrapper.sh
 
 export VIRTUALENVWRAPPER_HOOK_DIR=$WORKON_HOME
 export VIRTUALENVWRAPPER_LOG_DIR=$WORKON_HOME/logs
 export VIRTUALENVWRAPPER_TMPDIR=$WORKON_HOME/tmp
 export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
+
+source /usr/local/bin/virtualenvwrapper.sh
 
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
