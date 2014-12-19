@@ -13,6 +13,7 @@ export EDITOR="vim"
 
 # Cache pip-installed packages to avoid re-downloading
 export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
+export PYTHON_PATH=/usr/local/lib/python2.7/site-packages/
 
 # virtualenvwrapper
 export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
