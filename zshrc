@@ -41,7 +41,7 @@ HIST_IGNORE_SPACE="true"
 # Which plugins would you like to load? (plugins can be found in ~/.dotfiles/zsh/plugins/*)
 # Custom plugins may be added to ~/.dotfiles/zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(docker fabric sublime python django osx battery heroku brew virtualenvwrapper jira)
+plugins=(docker fabric sublime python django battery heroku brew virtualenvwrapper jira)
 
 source $ZSH/oh-my-zsh.sh
 

@@ -27,6 +27,8 @@ export VIRTUALENVWRAPPER_VIRTUALENV_ARGS='--no-site-packages'
 
 source /usr/local/bin/virtualenvwrapper.sh
 
+export HOST_IP=$(ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p' | head -1 )
+
 # Local config
 [[ -f ~/.zshenv.local ]] && source ~/.zshenv.local
 
